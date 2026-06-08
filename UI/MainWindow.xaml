@@ -1,0 +1,240 @@
+<Window x:Class="Arcanum.UI.MainWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Arcanum" Icon="avares://Arcanum/Assets/ico.ico"
+        Height="800" Width="960" MinHeight="580" MinWidth="780"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10,10,10,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240" MinWidth="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Painel esquerdo -->
+            <Border Background="{StaticResource CardBrush}" CornerRadius="8"
+                    Margin="0,0,8,0">
+                <DockPanel LastChildFill="True">
+
+                    <!-- Separador topo -->
+                    <Border DockPanel.Dock="Top" Background="#2A2A2A" Height="1" Margin="10,12,10,8"/>
+
+                    <!-- Busca -->
+                    <Border DockPanel.Dock="Top"
+                            Background="#111111" CornerRadius="6"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                            Margin="10,0,10,6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="🔍" FontSize="13" Foreground="{StaticResource SubtleBrush}"
+                                       VerticalAlignment="Center" Margin="8,0,4,0"/>
+                            <TextBox Grid.Column="1" x:Name="TbSearch"
+                                     Background="Transparent" BorderThickness="0"
+                                     Foreground="White" CaretBrush="White"
+                                     VerticalContentAlignment="Center"
+                                     Padding="0,6"
+                                     TextChanged="OnSearchChanged"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Auto-lock -->
+                    <Border DockPanel.Dock="Bottom" Margin="10,0,10,4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Auto-lock:" FontSize="11"
+                                       Foreground="{StaticResource SubtleBrush}"
+                                       VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <ComboBox x:Name="CbLockTime" Grid.Column="1"
+                                      Height="20" FontSize="10"
+                                      HorizontalAlignment="Stretch"
+                                      SelectionChanged="OnLockTimeChanged"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Botões inferiores -->
+                    <Button DockPanel.Dock="Bottom" Content="ESC / SAIR"
+                            Height="36" Margin="10,6,10,10"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Classes="Danger"
+                            Click="OnLock"/>
+                    <Button DockPanel.Dock="Bottom" Content="Trocar senha mestre"
+                            Height="36" Margin="10,6,10,6"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Classes="Primary"
+                            Click="OnChangeMasterPassword"/>
+                    <Button DockPanel.Dock="Bottom" Content="+ Nova entrada"
+                            Height="36" Margin="10,10,10,6"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Classes="Success"
+                            Click="OnNewEntry"/>
+                    <Border DockPanel.Dock="Bottom" Background="#2A2A2A" Height="1" Margin="10,0"/>
+
+                    <!-- Lista de entradas -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="EntryList" Margin="6,0"/>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!-- Painel direito -->
+            <Border Grid.Column="1" Background="{StaticResource CardBrush}" CornerRadius="8">
+                <DockPanel LastChildFill="True">
+
+                    <!-- Barra inferior -->
+                    <Border DockPanel.Dock="Bottom" Background="#111111"
+                            CornerRadius="0,0,8,8" Height="50">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button x:Name="BtnAplicar" Content="Aplicar"
+                                    Width="120" Height="34" Margin="0,0,24,0"
+                                    Classes="Success"
+                                    Click="OnApply"/>
+                            <Button x:Name="BtnExcluir" Content="Excluir"
+                                    Width="100" Height="34"
+                                    Classes="Danger"
+                                    Click="OnDelete"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Formulário -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="FormPanel" Margin="14,8,14,10">
+
+                            <!-- Serviço -->
+                            <TextBlock Text="Serviço" Margin="0,8,0,2"/>
+                            <TextBox x:Name="TbServico" MaxLength="100"/>
+
+                            <!-- Login -->
+                            <TextBlock Text="Login / E-mail" Margin="0,8,0,2"/>
+                            <TextBox x:Name="TbLogin" MaxLength="200"/>
+
+                            <!-- URL -->
+                            <TextBlock Text="URL" Margin="0,8,0,2"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TbUrl" MaxLength="500"
+                                         FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"/>
+                                <Button Grid.Column="1" Content="🌐"
+                                        Width="40" Height="36" Margin="4,0,0,0"
+                                        Classes="Secondary" Click="OnOpenUrl"/>
+                            </Grid>
+
+                            <!-- Senha -->
+                            <TextBlock Text="Senha" Margin="0,8,0,2"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="PbSenha" PasswordChar="•" MaxLength="500"
+                                         FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                         TextChanged="OnSenhaTextChanged"/>
+                                <Button Grid.Column="1" x:Name="BtnShowSenha" Content="👁"
+                                        Width="40" Height="36" Margin="4,0,0,0"
+                                        Classes="Secondary"
+                                        Click="OnToggleSenha"/>
+                                <Button Grid.Column="2" x:Name="BtnCopiarSenha" Content="Copiar"
+                                        Width="72" Height="36" Margin="4,0,0,0"
+                                        Classes="Secondary"
+                                        Click="OnCopySenha"/>
+                                <Button Grid.Column="3" Content="Gerar"
+                                        Width="72" Height="36" Margin="4,0,0,0"
+                                        Classes="Secondary"
+                                        Click="OnGenerateSenha"/>
+                            </Grid>
+
+                            <!-- Indicador de força da senha -->
+                            <ProgressBar x:Name="StrengthBar"
+                                         Minimum="0" Maximum="100" Value="0"
+                                         Height="4" Margin="0,6,0,2"
+                                         Background="#2A2A2A"
+                                         IsVisible="False"/>
+                            <TextBlock x:Name="TbStrength"
+                                       FontSize="11" Margin="0,0,0,0"
+                                       IsVisible="False"/>
+
+                            <!-- TOTP Seed -->
+                            <TextBlock Text="TOTP Seed  (opcional)" Margin="0,8,0,2"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="PbTotp" PasswordChar="•" MaxLength="128"
+                                         FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                         TextChanged="OnTotpChanged"/>
+                                <Button Grid.Column="1" x:Name="BtnShowTotp" Content="👁"
+                                        Width="40" Height="36" Margin="4,0,0,0"
+                                        Classes="Secondary"
+                                        Click="OnToggleTotp"/>
+                            </Grid>
+
+                            <!-- TOTP live -->
+                            <Border x:Name="TotpLivePanel" IsVisible="False"
+                                    Background="#111111" CornerRadius="6"
+                                    Margin="0,6,0,0" Padding="10,6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="TbTotpCode"
+                                               FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                               FontSize="22" FontWeight="Bold"
+                                               VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                        <TextBlock x:Name="TbTotpSecs"
+                                                   FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                                   FontSize="13" HorizontalAlignment="Right"/>
+                                        <ProgressBar x:Name="TotpBar" Width="100" Height="5"
+                                                     Margin="0,3,0,4"
+                                                     Background="#2A2A2A"
+                                                     Foreground="{StaticResource AccentBrush}"/>
+                                        <Button Content="Copiar" Width="72" Height="22"
+                                                Classes="Secondary"
+                                                Click="OnCopyTotp"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <!-- Observações -->
+                            <TextBlock Text="Observações" Margin="0,8,0,2"/>
+                            <TextBox x:Name="TbNotes"
+                                     Height="80" TextWrapping="Wrap"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     AcceptsReturn="True"
+                                     VerticalContentAlignment="Top"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Rodapé -->
+        <TextBlock Grid.Row="1"
+                   Classes="Footer"
+                   Text="{StaticResource FooterText}"/>
+    </Grid>
+</Window>

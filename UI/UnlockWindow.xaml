@@ -1,0 +1,129 @@
+<Window x:Class="Arcanum.UI.UnlockWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Arcanum" Icon="avares://Arcanum/Assets/ico.ico"
+        Height="480" Width="700"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        Background="{StaticResource BgBrush}">
+
+    <DockPanel>
+    <TextBlock DockPanel.Dock="Bottom"
+               Classes="Footer"
+               Text="{StaticResource FooterText}"/>
+    <Border Background="{StaticResource CardBrush}" CornerRadius="12" Margin="16,16,16,4">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Coluna esquerda — logo -->
+            <Border Grid.Column="0" CornerRadius="12,0,0,12">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform Y="-25"/>
+                    </StackPanel.RenderTransform>
+                    <Image Source="avares://Arcanum/Assets/logo.png"
+                           Width="350" Height="480"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Divisor -->
+            <Border Grid.Column="1" Background="#2A2A2A"/>
+
+            <!-- Coluna direita — formulário -->
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="28,24,28,24" VerticalAlignment="Center">
+
+                    <!-- Arquivo do cofre -->
+                    <Border Background="#111111" CornerRadius="8"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                            Padding="10,8" Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Text="Arquivo do cofre" FontSize="10"
+                                       Foreground="{StaticResource SubtleBrush}" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="VaultPathText"
+                                       FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                       FontSize="11" TextTrimming="CharacterEllipsis"
+                                       Margin="0,0,0,8"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="BtnAbrir" Content="Abrir"
+                                        Width="90" Height="28" Margin="0,0,16,0"
+                                        Classes="Success" Click="OnAbrir"/>
+                                <Button x:Name="BtnNovo" Content="Novo"
+                                        Width="90" Height="28"
+                                        Classes="Success" Click="OnNovo"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Título do modo -->
+                    <TextBlock x:Name="LblModo"
+                               FontSize="15" FontWeight="SemiBold"
+                               Margin="0,0,0,12"/>
+
+                    <!-- Senha -->
+                    <TextBlock x:Name="LblSenha" Text="Senha mestre" Margin="0,0,0,4"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="PbSenha" PasswordChar="•" KeyDown="OnKeyDown"
+                                 FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"
+                                 TextChanged="OnSenhaTextChanged"/>
+                        <Button Grid.Column="1" x:Name="BtnShowSenha" Content="👁"
+                                Width="36" Height="36" Margin="4,0,0,0"
+                                Classes="Secondary" Click="OnToggleSenha"/>
+                    </Grid>
+
+                    <!-- Indicador de força -->
+                    <ProgressBar x:Name="StrengthBar"
+                                 Minimum="0" Maximum="100" Value="0"
+                                 Height="4" Margin="0,6,0,2"
+                                 Background="#2A2A2A" IsVisible="False"/>
+                    <TextBlock x:Name="TbStrength" FontSize="11"
+                               Margin="0,0,0,0" IsVisible="False"/>
+
+                    <!-- Confirmar senha (só ao criar) -->
+                    <StackPanel x:Name="PanelConfirmar" IsVisible="False">
+                        <TextBlock Text="Confirmar senha" Margin="0,10,0,4"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PbConfirmar" PasswordChar="•" KeyDown="OnKeyDown"
+                                     FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"/>
+                            <Button Grid.Column="1" x:Name="BtnShowConfirmar" Content="👁"
+                                    Width="36" Height="36" Margin="4,0,0,0"
+                                    Classes="Secondary" Click="OnToggleConfirmar"/>
+                        </Grid>
+                        <TextBlock x:Name="TbMatch" FontSize="11"
+                                   Foreground="{StaticResource SubtleBrush}"
+                                   Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Separador -->
+                    <Border Background="#2A2A2A" Height="1" Margin="0,14"/>
+
+                    <!-- Botão principal -->
+                    <Button x:Name="BtnUnlock"
+                            Height="32" HorizontalAlignment="Stretch"
+                            Classes="Success" Click="OnUnlock"/>
+
+                    <!-- Status -->
+                    <TextBlock x:Name="TbStatus" Text="" FontSize="11"
+                               Foreground="{StaticResource DangerBrush}"
+                               HorizontalAlignment="Center" Margin="0,8,0,0"
+                               TextWrapping="Wrap" TextAlignment="Center"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+
+    </DockPanel>
+</Window>

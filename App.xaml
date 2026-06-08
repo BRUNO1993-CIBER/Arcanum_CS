@@ -1,0 +1,192 @@
+<Application x:Class="Arcanum.App"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             RequestedThemeVariant="Dark">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Cores -->
+            <Color x:Key="BgColor">#0D0D0D</Color>
+            <Color x:Key="CardColor">#1A1A1A</Color>
+            <Color x:Key="InputColor">#2A2A2A</Color>
+            <Color x:Key="AccentColor">#7A3535</Color>
+            <Color x:Key="AccentHoverColor">#5C2828</Color>
+            <Color x:Key="DangerColor">#7A4030</Color>
+            <Color x:Key="BorderColor">#444444</Color>
+            <Color x:Key="SubtleColor">#888888</Color>
+
+            <!-- Brushes -->
+            <SolidColorBrush x:Key="BgBrush"         Color="{StaticResource BgColor}"/>
+            <SolidColorBrush x:Key="CardBrush"        Color="{StaticResource CardColor}"/>
+            <SolidColorBrush x:Key="InputBrush"       Color="{StaticResource InputColor}"/>
+            <SolidColorBrush x:Key="AccentBrush"      Color="{StaticResource AccentColor}"/>
+            <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHoverColor}"/>
+            <SolidColorBrush x:Key="DangerBrush"      Color="{StaticResource DangerColor}"/>
+            <SolidColorBrush x:Key="BorderBrush"      Color="{StaticResource BorderColor}"/>
+            <SolidColorBrush x:Key="SubtleBrush"      Color="{StaticResource SubtleColor}"/>
+            <SolidColorBrush x:Key="FgBrush"          Color="White"/>
+
+            <!-- Texto do footer — fonte única de verdade -->
+            <x:String x:Key="FooterText">Arcanum v1.0  ·  C# / .NET 10  ·  Avalonia UI  ·  Open Source</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <!-- ComboBox compacto -->
+        <Style Selector="ComboBox">
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Padding"   Value="8,2"/>
+            <Setter Property="FontSize"  Value="11"/>
+        </Style>
+
+        <!-- TextBlock padrão -->
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource FgBrush}"/>
+            <Setter Property="FontFamily" Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"   Value="13"/>
+        </Style>
+
+        <!-- TextBox -->
+        <Style Selector="TextBox">
+            <Setter Property="Background"               Value="{StaticResource InputBrush}"/>
+            <Setter Property="Foreground"               Value="{StaticResource FgBrush}"/>
+            <Setter Property="CaretBrush"               Value="{StaticResource FgBrush}"/>
+            <Setter Property="BorderBrush"              Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness"          Value="1"/>
+            <Setter Property="Padding"                  Value="8,6"/>
+            <Setter Property="FontFamily"               Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                 Value="13"/>
+            <Setter Property="Height"                   Value="36"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FocusAdorner"             Value="{x:Null}"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+        </Style>
+
+        <!-- Botão Primary — outline vermelho escuro -->
+        <Style Selector="Button.Primary">
+            <Setter Property="Background"                 Value="Transparent"/>
+            <Setter Property="Foreground"                 Value="White"/>
+            <Setter Property="BorderBrush"                Value="#A04545"/>
+            <Setter Property="BorderThickness"            Value="1"/>
+            <Setter Property="FontFamily"                 Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                   Value="12"/>
+            <Setter Property="FontWeight"                 Value="SemiBold"/>
+            <Setter Property="Padding"                    Value="10,0"/>
+            <Setter Property="Height"                     Value="30"/>
+            <Setter Property="CornerRadius"               Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment"   Value="Center"/>
+            <Setter Property="Cursor"                     Value="Hand"/>
+        </Style>
+        <Style Selector="Button.Primary:pointerover">
+            <Setter Property="Background" Value="#2E1E1E"/>
+        </Style>
+        <Style Selector="Button.Primary:pressed">
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+        <Style Selector="Button.Primary:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- Botão Success — outline verde -->
+        <Style Selector="Button.Success">
+            <Setter Property="Background"                 Value="Transparent"/>
+            <Setter Property="Foreground"                 Value="White"/>
+            <Setter Property="BorderBrush"                Value="#4A8B63"/>
+            <Setter Property="BorderThickness"            Value="1"/>
+            <Setter Property="FontFamily"                 Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                   Value="12"/>
+            <Setter Property="FontWeight"                 Value="SemiBold"/>
+            <Setter Property="Padding"                    Value="10,0"/>
+            <Setter Property="Height"                     Value="30"/>
+            <Setter Property="CornerRadius"               Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment"   Value="Center"/>
+            <Setter Property="Cursor"                     Value="Hand"/>
+        </Style>
+        <Style Selector="Button.Success:pointerover">
+            <Setter Property="Background" Value="#1E3328"/>
+        </Style>
+        <Style Selector="Button.Success:pressed">
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+        <Style Selector="Button.Success:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- Botão Danger — outline vermelho-laranja -->
+        <Style Selector="Button.Danger">
+            <Setter Property="Background"                 Value="Transparent"/>
+            <Setter Property="Foreground"                 Value="White"/>
+            <Setter Property="BorderBrush"                Value="#A05545"/>
+            <Setter Property="BorderThickness"            Value="1"/>
+            <Setter Property="FontFamily"                 Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                   Value="12"/>
+            <Setter Property="FontWeight"                 Value="SemiBold"/>
+            <Setter Property="Padding"                    Value="10,0"/>
+            <Setter Property="Height"                     Value="30"/>
+            <Setter Property="CornerRadius"               Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment"   Value="Center"/>
+            <Setter Property="Cursor"                     Value="Hand"/>
+        </Style>
+        <Style Selector="Button.Danger:pointerover">
+            <Setter Property="Background" Value="#2E2018"/>
+        </Style>
+        <Style Selector="Button.Danger:pressed">
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+
+        <!-- Botão Secondary — outline cinza -->
+        <Style Selector="Button.Secondary">
+            <Setter Property="Background"                 Value="Transparent"/>
+            <Setter Property="Foreground"                 Value="#BBBBBB"/>
+            <Setter Property="BorderBrush"                Value="#555555"/>
+            <Setter Property="BorderThickness"            Value="1"/>
+            <Setter Property="FontFamily"                 Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                   Value="12"/>
+            <Setter Property="FontWeight"                 Value="Normal"/>
+            <Setter Property="Padding"                    Value="10,0"/>
+            <Setter Property="Height"                     Value="30"/>
+            <Setter Property="CornerRadius"               Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment"   Value="Center"/>
+            <Setter Property="Cursor"                     Value="Hand"/>
+        </Style>
+        <Style Selector="Button.Secondary:pointerover">
+            <Setter Property="Background" Value="#2A2A2A"/>
+        </Style>
+
+        <!-- Footer padrão do app -->
+        <Style Selector="TextBlock.Footer">
+            <Setter Property="FontSize"            Value="10"/>
+            <Setter Property="Foreground"          Value="{StaticResource SubtleBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin"              Value="0,4,0,6"/>
+        </Style>
+
+        <!-- Botão Entry (lista do vault) -->
+        <Style Selector="Button.Entry">
+            <Setter Property="Background"                 Value="Transparent"/>
+            <Setter Property="Foreground"                 Value="#E8D5D5"/>
+            <Setter Property="BorderBrush"                Value="#333333"/>
+            <Setter Property="BorderThickness"            Value="1"/>
+            <Setter Property="FontFamily"                 Value="Segoe UI,Cantarell,Ubuntu,Arial"/>
+            <Setter Property="FontSize"                   Value="13"/>
+            <Setter Property="Height"                     Value="36"/>
+            <Setter Property="HorizontalAlignment"        Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding"                    Value="10,0"/>
+            <Setter Property="CornerRadius"               Value="4"/>
+            <Setter Property="Cursor"                     Value="Hand"/>
+        </Style>
+        <Style Selector="Button.Entry:pointerover">
+            <Setter Property="Background" Value="#2A2A2A"/>
+        </Style>
+
+    </Application.Styles>
+</Application>
