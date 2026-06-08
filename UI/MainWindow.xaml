@@ -133,8 +133,9 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="TbUrl" MaxLength="500"
                                          FontFamily="Consolas,Cascadia Code,DejaVu Sans Mono,monospace"/>
-                                <Button Grid.Column="1" Content="🌐"
+                                <Button x:Name="BtnOpenUrl" Grid.Column="1" Content="🌐"
                                         Width="40" Height="36" Margin="4,0,0,0"
+                                        IsEnabled="False"
                                         Classes="Secondary" Click="OnOpenUrl"/>
                             </Grid>
 

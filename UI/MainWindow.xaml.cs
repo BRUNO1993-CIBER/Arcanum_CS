@@ -53,6 +53,12 @@ public partial class MainWindow : Window
         _idleTimer   = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _totpRefresh = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
+        TbUrl.TextChanged += (_, _) =>
+        {
+            var t = TbUrl.Text?.Trim() ?? "";
+            BtnOpenUrl.IsEnabled = t.StartsWith("http://") || t.StartsWith("https://");
+        };
+
         PointerMoved  += (_, _) => _lastActivity = DateTime.UtcNow;
         KeyDown       += (_, e) => { _lastActivity = DateTime.UtcNow; if (e.Key == Avalonia.Input.Key.Escape) DoLock(); };
         PointerPressed += (_, _) => _lastActivity = DateTime.UtcNow;
