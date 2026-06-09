@@ -255,6 +255,7 @@ Digite a senha mestre para desbloquear. Se a senha estiver errada ou o arquivo t
 - [Como o sistema funciona por dentro](docs/como-funciona.md) — criptografia, formato `.arcanum`, gerador de senhas, "é possível burlar?"
 - [Arquitetura de Segurança](docs/seguranca.md) — primitivas criptográficas, formato binário, catálogo de vulnerabilidades V1–V11
 - [Estrutura do Projeto e Dependências](docs/arquitetura.md) — organização do código, NuGet packages, notas para desenvolvedores
+- [Instalação no Linux](docs/manual-linux.md) — guia passo a passo + script de instalação para Linux Mint, Ubuntu e derivados
 
 ---
 
