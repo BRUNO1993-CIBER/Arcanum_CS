@@ -193,7 +193,10 @@ public partial class MainWindow : Window
         }
 
         if (_selectedEntry is not null && _btnMap.TryGetValue(_selectedEntry.Id, out var sel))
+        {
+            _selectedBtn = sel;
             HighlightBtn(sel);
+        }
     }
 
     private void OnSearchChanged(object? sender, TextChangedEventArgs e) => RefreshList();
@@ -314,6 +317,10 @@ public partial class MainWindow : Window
 
         Save();
         RefreshList();
+
+        BtnAplicar.Content = "✓ Salvo";
+        await Task.Delay(1_500);
+        if (IsVisible) BtnAplicar.Content = "Aplicar";
     }
 
     // --- Excluir ---
